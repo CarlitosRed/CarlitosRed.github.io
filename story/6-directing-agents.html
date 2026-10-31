@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Making AI agents' work trustworthy · Carlos Redondo</title>
+<title>Learning to work with AI agents · Carlos Redondo</title>
 <meta name="description" content="Chapter 6, 2026: a paid document-AI prototype, and a public framework where AI agents write the code and nothing merges without a check.">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="../style.css">
@@ -21,24 +21,24 @@
   <div class="story-head">
     <a class="back" href="../#story">← All chapters</a>
     <p class="meta"><span>Chapter 6</span><span aria-hidden="true">·</span><span>2026 – now</span><span class="pill sky">Today</span></p>
-    <h1>Making AI agents' work <em>trustworthy</em></h1>
-    <p class="tldr" data-evidence="E-051 E-027 E-028"><b>In short:</b> a paid prototype for a client's document-AI system, then a public project where AI agents write the code and I own the rules, the decisions and the final yes.</p>
+    <h1>Learning to work <em>with AI agents</em></h1>
+    <p class="tldr" data-evidence="E-051 E-027 E-028"><b>In short:</b> a paid prototype for a client's document-AI system, then a public project where AI agents write the code, and I set the rules and give the final yes.</p>
   </div>
   <article class="story">
     <h2>A paid prototype</h2>
     <p data-evidence="E-051">In September 2026 I took on a paid freelance project. A client had a system that reads incoming orders with document AI, and I delivered the investigation, the business logic and a prototype. The client and the terms stay private.</p>
     <h2>Who checks the agents?</h2>
-    <p data-evidence="E-027 E-028">In October 2026 I started a different kind of project. AI coding agents from two companies, Anthropic's Claude and OpenAI's Codex, would write the code. My role was the one I'd liked best at Snowflake: owning the process. I set the goals and the limits, made the decisions and gave the final approval on every change.</p>
+    <p data-evidence="E-027 E-028">In October 2026 I started a different kind of project. AI coding agents from two companies, Anthropic's Claude and OpenAI's Codex, would write the code. My part was the one I'd liked best at Snowflake: looking after the process. I set the goals and the limits, made the calls and gave the final approval on every change.</p>
     <p data-evidence="E-029 E-031">The rule that mattered most: the one who did the work shouldn't be the one who checks it. So one company's agent wrote a change and the other company's agent reviewed it. A merge gate refuses any change that's missing that review at the exact version, the evidence it requires in the pull request, my approval, or a clean secrets scan.</p>
     <p data-evidence="E-030">About 500 offline tests have to pass before anything lands (529 as of 26 October 2026).</p>
     <blockquote data-evidence="E-031">The second reviewer caught bugs the author's own tests had missed, including one that could silently corrupt data.</blockquote>
     <h2>Writing failures down</h2>
-    <p data-evidence="E-034">Every process failure goes into a log with its root cause and fix, and every rule names what enforces it: the gate, the tests, a template, or just advice. As of 21 October 2026 that was 29 rules and 29 logged failures.</p>
+    <p data-evidence="E-034">I'm learning this as I go, so mistakes are part of the work. Every process failure goes into a log with its root cause and fix, and every rule names what enforces it: the gate, the tests, a template, or just advice. As of 21 October 2026 that was 29 rules and 29 logged failures.</p>
     <p data-evidence="E-036">One entry shows why this matters. Our notes said one agent's shell commands failed every single time. The agents re-tested it, the failure was gone, and the note was corrected with the date and the cause.</p>
     <p data-evidence="E-027">The project is public: 97 pull requests merged and 11 tagged releases as of 26 October 2026. <a href="https://github.com/CarlitosRed/agent-orchestration" rel="noopener">You can read it on GitHub.</a></p>
     <h2>What connects the chapters</h2>
     <p data-evidence="E-050 E-012 E-028 E-029">Looking back, it's been the same job each time, at a bigger scale. Find where knowledge gets lost, write it down, make the process repeatable, and check the result before anyone depends on it. First that was a new hire on a call, then a support team, then a monthly funds process. Now it's AI agents.</p>
-    <p data-evidence="E-045">I'm also studying Data Science Engineering at LEAD University. The next chapter, I hope, is on a team that builds with AI agents and wants someone who makes sure the work is right.</p>
+    <p data-evidence="E-045">I'm also studying Data Science Engineering at LEAD University. The next chapter, I hope, is on a team that builds with AI agents, where I can keep learning and help make sure the work is right.</p>
     <div class="toolbox"><b>Tools in this chapter</b>Claude and Codex agents, GitHub pull requests and CI, merge gates, written rules and failure logs.</div>
     <nav class="pager" aria-label="Chapters">
       <a href="5-inside-client-projects.html"><small>← Previous chapter</small>Inside client projects</a>
