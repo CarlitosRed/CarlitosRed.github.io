@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carlos Redondo · AI operations and analysis</title>
+<meta name="description" content="Carlos Redondo: AI operations and agent workflows, built on analyst, operations and consulting work. Costa Rica based, remote-compatible.">
+<meta name="color-scheme" content="light dark">
+<!--
+  Portfolio of Carlos Alberto Redondo Alvarado.
+  Signed: Writer (Claude), 2026-10-30. Draft for Carlos to review; nothing is published.
+  Every claim carries its evidence IDs in a data-evidence attribute (career-agent-hq/evidence/E-###).
+  Self-contained: no external fonts, scripts, images, trackers or network requests.
+-->
+<style>
+:root{
+  --bg:#fbf6ee;
+  --bg-2:#f3eadc;
+  --surface:rgba(255,255,255,.74);
+  --surface-solid:#ffffff;
+  --line:#e8dbc8;
+  --ink:#2a1d14;
+  --ink-2:#4e3d30;
+  --ink-3:#6b5646;
+  --accent:#a9561a;
+  --accent-ink:#9a4f12;
+  --accent-soft:#f8e6d2;
+  --coral:#a3531a;
+  --coral-soft:#f8e6d2;
+  --coral-ring:#e39b4c;
+  --sky:#7fa8cf;
+  --sky-soft:#e4eef7;
+  --glow:rgba(240,170,90,.42);
+  --ok:#17785a;
+  --ok-soft:#e2f4ed;
+  --warn:#7a5200;
+  --warn-soft:#fbf0d9;
+  --blob-1:#f5c27a;
+  --blob-2:#cfe0f0;
+  --blob-3:#f0d9b5;
+  --shadow:0 1px 2px rgba(42,29,20,.05),0 8px 30px rgba(42,29,20,.07);
+  --radius:20px;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:ui-serif,"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Segoe UI Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#17110c;
+    --bg-2:#1e1610;
+    --surface:rgba(34,25,19,.72);
+    --surface-solid:#221913;
+    --line:#3a2c21;
+    --ink:#f6ede0;
+    --ink-2:#dccbb6;
+    --ink-3:#b39d86;
+    --accent:#f0a35e;
+    --accent-ink:#f4b678;
+    --accent-soft:#3a2716;
+    --coral:#f0a35e;
+    --coral-soft:#3a2716;
+    --coral-ring:#e8913f;
+    --sky:#9dbddd;
+    --sky-soft:#1c2733;
+    --glow:rgba(240,163,94,.30);
+    --ok:#6fd3ad;
+    --ok-soft:#10302a;
+    --warn:#e9c27a;
+    --warn-soft:#342612;
+    --blob-1:#8a4e16;
+    --blob-2:#2d4459;
+    --blob-3:#6b4318;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:var(--accent-ink);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:16px;top:-60px;background:var(--surface-solid);color:var(--ink);padding:10px 16px;border-radius:10px;border:1px solid var(--line);z-index:100;font-weight:600}
+.skip:focus{top:12px}
+.wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Nav */
+header.top{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.mark{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,#b8641f,#7a3f10);display:grid;place-items:center;color:#fff;font-size:13px;font-weight:800;letter-spacing:.02em}
+.nav ul{list-style:none;display:flex;gap:4px;margin:0;padding:0}
+.nav ul a{display:block;padding:8px 12px;border-radius:999px;color:var(--ink-2);text-decoration:none;font-size:15px}
+.nav ul a:hover{background:var(--accent-soft);color:var(--ink)}
+@media (max-width:820px){.nav ul li.opt{display:none}}
+@media (max-width:520px){.nav ul{gap:0}.nav ul a{padding:8px 8px;font-size:14px}.brand .full{display:none}}
+
+/* Hero */
+.hero{position:relative;padding:96px 0 72px;isolation:isolate;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.75;z-index:-1;will-change:transform}
+.orb.a{width:520px;height:520px;background:var(--blob-1);top:-160px;right:-120px;animation:drift 22s ease-in-out infinite alternate}
+.orb.b{width:420px;height:420px;background:var(--blob-2);top:120px;right:240px;animation:drift 28s ease-in-out infinite alternate-reverse}
+.orb.c{width:360px;height:360px;background:var(--blob-3);top:-60px;left:-160px;opacity:.45;animation:drift 32s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-40px,30px,0) scale(1.08)}}
+.glass{position:absolute;right:6%;top:72px;width:300px;height:300px;border-radius:36px;background:linear-gradient(145deg,rgba(255,255,255,.55),rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transform:rotate(12deg);z-index:-1;box-shadow:var(--shadow)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .glass{background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.02));border-color:rgba(255,255,255,.14)}}
+@media (max-width:900px){.glass{display:none}}
+.eyebrow{display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-weight:600;margin:0 0 22px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--sky)}
+h1{font-size:clamp(2.6rem,7.2vw,5.6rem);line-height:1.02;letter-spacing:-.035em;margin:0 0 26px;max-width:14ch;font-weight:750}
+h1 em{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--coral);letter-spacing:-.02em}
+.lede{font-size:clamp(1.08rem,1.9vw,1.3rem);color:var(--ink-2);max-width:60ch;margin:0 0 34px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;font-weight:600;text-decoration:none;font-size:15px;border:1px solid transparent;transition:transform .2s ease,box-shadow .2s ease}
+.btn.primary{background:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#17110c}}
+.btn.ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:64px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.stat b{display:block;font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-.02em;line-height:1.15}
+.stat span{display:block;font-size:14px;color:var(--ink-3);margin-top:4px;line-height:1.4}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Sections */
+section.block{padding:88px 0;border-top:1px solid var(--line);scroll-margin-top:72px}
+.head{display:grid;grid-template-columns:180px 1fr;gap:24px;margin-bottom:44px;align-items:baseline}
+.num{font-family:var(--mono);font-size:14px;color:var(--coral);letter-spacing:.06em}
+h2{font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.03em;line-height:1.08;margin:0;font-weight:720}
+.head p{grid-column:2;margin:12px 0 0;color:var(--ink-2);max-width:62ch}
+@media (max-width:720px){.head{grid-template-columns:1fr;gap:8px}.head p{grid-column:1}}
+h3{font-size:1.3rem;letter-spacing:-.015em;line-height:1.25;margin:0 0 10px}
+
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface-solid);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.card .ico{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center;margin-bottom:18px}
+.card p{color:var(--ink-2);margin:0 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.chips li{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--bg-2);color:var(--ink-2);border:1px solid var(--line)}
+
+/* Case studies */
+.cases{display:grid;gap:18px}
+.case{display:grid;grid-template-columns:200px 1fr;gap:28px;background:var(--surface-solid);border:1px solid var(--line);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);position:relative}
+.case.feature{background:linear-gradient(160deg,var(--accent-soft),var(--surface-solid) 55%)}
+@media (max-width:760px){.case{grid-template-columns:1fr;gap:12px;padding:24px}}
+.case .meta{font-size:14px;color:var(--ink-3);display:flex;flex-direction:column;gap:10px}
+.case .idx{font-family:var(--mono);font-size:13px;color:var(--accent-ink)}
+.case .role{font-weight:600;color:var(--ink)}
+.case ul.pts{margin:14px 0 0;padding-left:20px;color:var(--ink-2)}
+.case ul.pts li{margin:6px 0}
+.case p.sum{color:var(--ink-2);margin:0}
+.case .foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.02em;padding:4px 10px;border-radius:999px;border:1px solid transparent;width:fit-content}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.tag.v{background:var(--ok-soft);color:var(--ok)}
+.tag.s{background:var(--warn-soft);color:var(--warn)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:14px;color:var(--ink-3);margin:-20px 0 28px}
+.who{font-size:14px;color:var(--ink-3);border-left:3px solid var(--sky);padding:2px 0 2px 12px;margin:16px 0 0}
+
+/* Timeline */
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:180px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.tl li{display:grid;grid-template-columns:180px 1fr;gap:36px;padding:0 0 34px;position:relative}
+.tl li::after{content:"";position:absolute;left:175px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--surface-solid);border:2px solid var(--coral-ring)}
+.tl .when{font-family:var(--mono);font-size:13px;color:var(--ink-3);padding-top:4px;text-align:right;padding-right:24px}
+.tl h3{font-size:1.15rem;margin:0}
+.tl .org{color:var(--accent-ink);font-weight:600}
+.tl p{margin:6px 0 0;color:var(--ink-2)}
+@media (max-width:720px){
+  .tl::before{left:5px}
+  .tl li{grid-template-columns:1fr;gap:4px;padding-left:28px}
+  .tl li::after{left:0}
+  .tl .when{text-align:left;padding:0}
+}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.skills{grid-template-columns:1fr}}
+.skills .card h3{font-size:1.05rem;margin-bottom:14px}
+.skills ul{list-style:none;margin:0;padding:0}
+.skills li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.skills li:last-child{border-bottom:0}
+.skills li small{color:var(--ink-3);font-size:13px;text-align:right}
+
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.kv{list-style:none;margin:0;padding:0}
+.kv li{padding:12px 0;border-bottom:1px solid var(--line)}
+.kv li:last-child{border-bottom:0}
+.kv b{display:block}
+.kv span{color:var(--ink-3);font-size:15px}
+
+/* Principles */
+.principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;counter-reset:p}
+@media (max-width:760px){.principles{grid-template-columns:1fr}}
+.principle{padding:26px 28px;border-radius:var(--radius);border:1px solid var(--line);background:var(--surface-solid)}
+.principle h3{display:flex;gap:12px;align-items:baseline}
+.principle h3::before{counter-increment:p;content:counter(p,decimal-leading-zero);font-family:var(--mono);font-size:13px;color:var(--coral);font-weight:500}
+.principle p{margin:0;color:var(--ink-2)}
+
+/* Contact */
+.contact{border-radius:28px;padding:48px;background:linear-gradient(135deg,var(--accent-soft),var(--surface-solid));border:1px solid var(--line);position:relative;overflow:hidden}
+@media (max-width:600px){.contact{padding:28px 22px}}
+.contact h2{max-width:18ch}
+.contact p{color:var(--ink-2);max-width:56ch}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.placeholder{font-size:13px;color:var(--warn);background:var(--warn-soft);padding:8px 12px;border-radius:10px;margin-top:18px;display:inline-block}
+
+footer{padding:40px 0 56px;color:var(--ink-3);font-size:14px}
+footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:24px}
+
+/* Motion */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.no-js .reveal{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .orb{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  .btn{transition:none}
+}
+@media (max-width:420px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  .hero{padding:64px 0 56px}
+  section.block{padding:64px 0}
+  .card,.principle{padding:22px}
+  .stat{padding:14px 14px}
+  .stats{gap:10px}
+}
+
+/* Pass 2: portrait hero, profile, notes */
+.hero-grid{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:56px;align-items:center}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr;gap:28px}}
+.portrait{margin:0;position:relative;width:min(300px,70vw);aspect-ratio:1;border-radius:50%;padding:8px;background:conic-gradient(from 210deg,var(--coral-ring),#f3c98b,var(--sky),#f3c98b,var(--coral-ring))}
+.portrait::before{content:"";position:absolute;inset:-28%;border-radius:50%;background:radial-gradient(circle,var(--glow) 0%,transparent 68%);z-index:-1;pointer-events:none}
+.portrait::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px dashed color-mix(in srgb,var(--sky) 60%,transparent);pointer-events:none}
+.portrait .ph,.portrait img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:var(--surface-solid);border:6px solid var(--bg)}
+.portrait .ph{color:var(--ink-3)}
+.portrait figcaption{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);font-size:12px;font-weight:600;white-space:nowrap;padding:4px 10px;border-radius:999px;background:var(--warn-soft);color:var(--warn)}
+@media (max-width:860px){.portrait{width:180px}}
+@media (max-width:520px){.titleline .sep{display:none}.titleline{flex-direction:column;align-items:flex-start;gap:2px}}
+.hello{font-family:"Segoe Print","Bradley Hand","Chalkboard SE",var(--serif);font-size:clamp(1.15rem,2vw,1.4rem);color:var(--coral);margin:0 0 6px;font-weight:600}
+.hero h1{font-size:clamp(2.8rem,7vw,5.4rem);max-width:none;margin:0 0 10px}
+.titleline{font-size:clamp(1.05rem,1.8vw,1.25rem);font-weight:600;color:var(--ink);margin:0 0 22px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.titleline .sep{width:5px;height:5px;border-radius:50%;background:var(--sky)}
+.titleline .loc{color:var(--ink-3);font-weight:500}
+.motto{font-family:var(--serif);font-style:italic;color:var(--ink-3);margin:-14px 0 26px}
+.hero .lede{margin-bottom:24px}
+.lede em{font-family:var(--serif);font-style:italic;color:var(--coral)}
+
+.profile{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:56px}
+@media (max-width:860px){.profile{grid-template-columns:1fr;gap:28px}}
+.profile .id h3{font-size:1.6rem;letter-spacing:-.02em;margin:0}
+.profile .id .t{color:var(--ink-2);margin:4px 0 22px}
+.facts{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.facts li{padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;display:grid;grid-template-columns:96px 1fr;gap:12px}
+.facts b{font-weight:600;color:var(--ink-3);font-size:13px;text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
+.bio{columns:2 300px;column-gap:44px;color:var(--ink-2)}
+.bio p{margin:0 0 18px;break-inside:avoid}
+.bio p:first-child{color:var(--ink)}
+.path{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.path li{font-size:14px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface-solid);color:var(--ink-2)}
+.path li b{color:var(--ink);font-weight:600}
+.path li.now{border-color:var(--coral-ring);background:var(--coral-soft);color:var(--coral)}
+.path li.now b{color:var(--coral)}
+.path li.arr{border:0;background:none;padding:0 2px;color:var(--ink-3)}
+
+.notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.notes{grid-template-columns:1fr}}
+.note{position:relative;padding:26px 26px 22px;border-radius:var(--radius);background:var(--surface-solid);border:1px dashed var(--line)}
+.note .soon{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--coral-soft);color:var(--coral);margin-bottom:14px}
+.note h3{font-size:1.12rem}
+.note p{margin:0;color:var(--ink-2);font-size:15px}
+@media print{.orb,.glass,header.top{display:none}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="#top"><span class="mark" aria-hidden="true">CR</span><span>Carlos <span class="full">Redondo</span></span></a>
+    <ul>
+      <li class="opt"><a href="#profile">Profile</a></li>
+      <li><a href="#work">Work</a></li>
+      <li class="opt"><a href="#notes">Notes</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li class="opt"><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="orb a" aria-hidden="true"></div>
+    <div class="orb b" aria-hidden="true"></div>
+    <div class="orb c" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <!-- PHOTO SLOT (Carlos): replace the whole <svg class="ph">...</svg> line with
+             <img src="carlos.jpg" alt="Portrait of Carlos Redondo" width="600" height="600">
+             (a square photo saved next to index.html), then delete the <figcaption> line. -->
+        <figure class="portrait">
+          <img src="carlos.jpg" alt="Portrait of Carlos Redondo, smiling, in a striped shirt" width="600" height="600">
+        </figure>
+        <div>
+          <h1 id="hero-title">Carlos Redondo</h1>
+          <p class="titleline">AI operations and analysis <span class="sep" aria-hidden="true"></span> <span class="loc">Costa Rica, open to remote roles</span></p>
+          <p class="lede" data-evidence="E-052 E-028 E-031 E-010 decisions-2026-10-27">
+            I direct AI agents, and I make sure their work gets <em>checked</em> before anyone relies on it. I got here the long way: about 3 years of customer and technical support, then 2+ years of analyst, operations and consulting work at Snowflake, Varicent, VMware and Amadeus. These days I set the goals for Claude and Codex agents, make the decisions and approve every change. They write much of the code; I make sure it has been reviewed and tested first.
+          </p>
+          <div class="cta">
+            <a class="btn primary" href="#work">See selected work</a>
+            <a class="btn ghost" href="https://github.com/CarlitosRed/agent-orchestration" rel="noopener">Open the public framework</a>
+          </div>
+        </div>
+      </div>
+      <div class="stats" role="list">
+        <div class="stat" role="listitem" data-evidence="E-010 decisions-2026-10-27"><b>$1.5M–$3M</b><span>partner cloud funds per quarter, in a process I owned at Snowflake</span></div>
+        <div class="stat" role="listitem" data-evidence="E-030"><b>~500</b><span>offline tests that must pass in CI before a change merges (Oct 2026)</span></div>
+        <div class="stat" role="listitem" data-evidence="E-034"><b>29</b><span>written rules, each with a named enforcer (as of 2026-10-21)</span></div>
+        <div class="stat" role="listitem" data-evidence="E-027"><b>11</b><span>tagged framework releases (as of 2026-10-26)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 PROFILE -->
+  <section class="block" id="profile" aria-labelledby="profile-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="num">01 / Profile</span>
+        <h2 id="profile-title">The short version.</h2>
+      </div>
+      <div class="profile">
+        <div class="id reveal">
+          <h3>Carlos Redondo</h3>
+          <p class="t">AI operations and analysis</p>
+          <ul class="facts">
+            <li><b>Now</b><span data-evidence="E-028">Program Owner, AI agent workflows (independent)</span></li>
+            <li><b>Based</b><span>Costa Rica, remote</span></li>
+            <li><b>Languages</b><span data-evidence="E-041 E-040">Spanish (native), English (B2)</span></li>
+            <li><b>Studying</b><span data-evidence="E-045">Data Science Engineering, LEAD University (in progress)</span></li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="bio">
+            <p data-evidence="E-027 E-028 E-029 E-030 E-031">Carlos Redondo directs teams of AI agents from two vendors, Claude and Codex, as Program Owner of a public governance framework for AI coding agents. He sets the goals and constraints, makes the recorded decisions and gives the final approval on each change. The agents write the code; every change passes a merge gate, a review by the other vendor and about 500 offline tests before it lands.</p>
+            <p data-evidence="E-009 E-048 E-022">Before that, Carlos was a Business Consultant at Varicent from August 2025 to May 2026, working inside client implementations on requirements, configuration in Varicent Designer, SQL investigation and QA/UAT.</p>
+            <p data-evidence="E-010 E-012 E-018 E-049 decisions-2026-10-27">From January 2024 to May 2025 he was Partner Process Specialist at Snowflake, where he owned the monthly partner cloud-funds process, $1.5M to $3M a quarter, and replaced its manual Excel matching with Python and Snowflake notebooks. Earlier he was a contract Business Analyst at VMware.</p>
+            <p data-evidence="E-052 E-050">He began in customer and technical support at Sykes and Amadeus, about three years in all, then moved into a Data Analyst role at Amadeus, where he built the team's knowledge base.</p>
+            <p data-evidence="E-045 E-046">Carlos is studying Data Science Engineering at LEAD University (in progress) and holds the Cisco Networking Academy IT Essentials certificate.</p>
+          </div>
+          <ol class="path" aria-label="Career path">
+            <li data-evidence="E-052"><b>2020</b> Sykes</li><li class="arr" aria-hidden="true">→</li>
+            <li data-evidence="E-052"><b>2021</b> Amadeus</li><li class="arr" aria-hidden="true">→</li>
+            <li data-evidence="E-049"><b>2023</b> VMware</li><li class="arr" aria-hidden="true">→</li>
+            <li data-evidence="E-010"><b>2024</b> Snowflake</li><li class="arr" aria-hidden="true">→</li>
+            <li data-evidence="E-009"><b>2025</b> Varicent</li><li class="arr" aria-hidden="true">→</li>
+            <li class="now" data-evidence="E-028 E-051"><b>2026</b> AI agent workflows</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 SELECTED WORK -->
+  <section class="block" id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="num">02 / Selected work</span>
+        <h2 id="work-title">Work I can show, and work I can explain.</h2>
+        <p>Each item says how sure you can be. Green means you can check it in a public repo. Amber means I'm telling you: ask me and I'll explain or point you to what I can share.</p>
+      </div>
+      <div class="legend reveal" aria-label="Evidence key">
+        <span class="tag v">Checkable in public</span>
+        <span class="tag s">Self-reported</span>
+      </div>
+
+      <div class="cases">
+        <article class="case feature reveal" data-evidence="E-027 E-028 E-029 E-030 E-031 E-034">
+          <div class="meta">
+            <span class="idx">Case 01</span>
+            <span class="role">Program Owner</span>
+            <span>Oct 2026</span>
+            <span class="tag v">Checkable in public</span>
+          </div>
+          <div>
+            <h3>A public governance framework for teams of AI coding agents</h3>
+            <p class="sum">When two AI vendors' agents write and review each other's code, someone has to decide what "done" means and make it hard to skip. I directed Claude and Codex agents to build that system: roles, a merge gate, a review loop, a rules register and a log of process failures.</p>
+            <ul class="pts">
+              <li data-evidence="E-029">A merge gate that refuses to merge without a tier label, required evidence in the pull request, a review from the other vendor at the exact commit, the owner's approval, and a secrets scan.</li>
+              <li data-evidence="E-031">Cross-vendor review (Claude writes, Codex reviews) caught real defects the author's own tests missed, including a silent data-corruption bug and a gap in CI trust.</li>
+              <li data-evidence="E-030">About 500 offline tests across 10 suites must pass in CI before any change can merge (as of Oct 2026).</li>
+              <li data-evidence="E-034 E-027">29 rules, each naming what enforces it, and a 29-row failure log with root cause and fix (as of 2026-10-21); 97 pull requests merged and 11 tagged releases (as of 2026-10-26).</li>
+            </ul>
+            <p class="who" data-evidence="E-028">My part (self-reported): I set the goals, made the recorded decisions and gave the final approval on each change. The agents wrote the code.</p>
+            <div class="foot"><a href="https://github.com/CarlitosRed/agent-orchestration" rel="noopener">github.com/CarlitosRed/agent-orchestration</a></div>
+          </div>
+        </article>
+
+        <article class="case reveal" data-evidence="E-051">
+          <div class="meta">
+            <span class="idx">Case 02</span>
+            <span class="role">Paid freelance project</span>
+            <span>Sep 2026</span>
+            <span class="tag s">Self-reported</span>
+          </div>
+          <div>
+            <h3>A document-AI prototype for order intake</h3>
+            <p class="sum">For a client's document-AI order-intake system, I delivered the investigation, the business logic and a prototype.</p>
+            <p class="who">The client and the terms are confidential.</p>
+          </div>
+        </article>
+
+        <article class="case reveal" data-evidence="E-010 E-011 E-012 E-016 E-018 decisions-2026-10-27">
+          <div class="meta">
+            <span class="idx">Case 03</span>
+            <span class="role">Snowflake</span>
+            <span>Jan 2024 – May 2025</span>
+            <span class="tag s">Self-reported</span>
+          </div>
+          <div>
+            <h3>Automating a partner-funds process worth $1.5M–$3M a quarter</h3>
+            <p class="sum">I owned the monthly process for managing partners' cloud funds. The data lived in places that could not be joined at the source, and the matching was done by hand in Excel, updated every day through the month.</p>
+            <ul class="pts">
+              <li data-evidence="E-011 E-016">Pulled data with SQL from Snowhouse and from Workday, matched and linked the reports, calculated the figures and entered them in the partner information system.</li>
+              <li data-evidence="E-012 E-018">Replaced the manual Excel matching with Python scripts in Snowflake notebooks, run once at the end of the week.</li>
+              <li data-evidence="E-010 decisions-2026-10-27">At fiscal-year end, entered the full backlog of about 200 to 300 pending fund requests in one day, so the budget was less affected.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case reveal" data-evidence="E-009 E-022 E-048 E-024">
+          <div class="meta">
+            <span class="idx">Case 04</span>
+            <span class="role">Varicent</span>
+            <span>Aug 2025 – May 2026</span>
+            <span class="tag s">Self-reported</span>
+          </div>
+          <div>
+            <h3>Implementation consulting: requirements to tested configuration</h3>
+            <p class="sum">As a Business Consultant inside client projects, I turned how a client actually runs their numbers into configuration in Varicent Designer, then proved it worked.</p>
+            <ul class="pts">
+              <li data-evidence="E-048">Investigated configuration and data discrepancies with SQL and Excel, found root causes, reconciled results and validated outputs during QA/UAT.</li>
+              <li data-evidence="E-048 E-022">Built and tested imports, tables, calculation rules and workflow components in Varicent Designer, and documented expected results, testing evidence and repeatable procedures.</li>
+              <li data-evidence="E-048">Worked with clients, business users and technical teams to understand requirements, reproduce issues and communicate blockers.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="case reveal" data-evidence="E-050 E-052">
+          <div class="meta">
+            <span class="idx">Case 05</span>
+            <span class="role">Amadeus</span>
+            <span>Jun 2021 – Jun 2023</span>
+            <span class="tag s">Self-reported</span>
+          </div>
+          <div>
+            <h3>A team knowledge base built from nothing</h3>
+            <p class="sum">Our team inherited a Salesforce-based product with no documentation. I built and kept current a knowledge base, indexed like a documentation site, so the team could answer from what we already knew.</p>
+            <ul class="pts">
+              <li data-evidence="E-050">Ran weekly sessions to capture new issues, then documented them.</li>
+              <li data-evidence="E-050">Proposed splitting support into subject-matter groups. My manager approved it, and it stayed after I left.</li>
+              <li data-evidence="E-050">Trained about four new hires, in two waves.</li>
+            </ul>
+            <p class="who">Capturing, structuring and keeping knowledge current is the same job as giving AI agents good context. I did it by hand first.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 WHAT I DO -->
+  <section class="block" id="what" aria-labelledby="what-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="num">03 / What I do</span>
+        <h2 id="what-title">Three kinds of work, one habit: verify first.</h2>
+      </div>
+      <div class="cards">
+        <article class="card reveal" data-evidence="E-028 E-029 E-031 E-004">
+          <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7.5 10.8 16M16 7.5 13.2 16M8.5 6h7"/></svg></div>
+          <h3>Directing AI agent teams</h3>
+          <p>I set goals and rules for Claude and Codex agents, put review gates between writing and merging, and approve each change. One vendor's agent reviews the other's work.</p>
+          <ul class="chips"><li>Review gates</li><li>Cross-vendor review</li><li>Prompt checklists</li><li>Decision logs</li></ul>
+        </article>
+        <article class="card reveal" data-evidence="E-011 E-012 E-017 E-018 E-048">
+          <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M8 15l3-4 3 2 5-6"/></svg></div>
+          <h3>Business and data analysis</h3>
+          <p>I pull data from systems that don't talk to each other, reconcile it, find why numbers disagree, and automate the repeat work.</p>
+          <ul class="chips"><li>SQL</li><li>Python</li><li>Excel</li><li>Snowflake notebooks</li><li>Reconciliation</li></ul>
+        </article>
+        <article class="card reveal" data-evidence="E-048 E-022 E-024 E-049">
+          <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M12 15v2"/></svg></div>
+          <h3>Implementation and client-facing consulting</h3>
+          <p>I sit with clients to understand the process, configure the solution, and test it in QA/UAT before anyone relies on it.</p>
+          <ul class="chips"><li>Varicent Designer</li><li>QA/UAT</li><li>Requirements</li><li>Salesforce</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 EXPERIENCE -->
+  <section class="block" id="experience" aria-labelledby="exp-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="num">04 / Experience</span>
+        <h2 id="exp-title">From the phones to process ownership.</h2>
+        <p>About 3 years of customer and technical support taught me how problems reach people. The analyst and consulting years taught me how to fix the process behind them.</p>
+      </div>
+      <ol class="tl" reversed>
+        <li class="reveal" data-evidence="E-028 E-051">
+          <span class="when">2026</span>
+          <div><h3>Program Owner, AI agent workflows <span class="org">· Independent</span></h3><p>Directing Claude and Codex agents on a public governance framework, plus a paid document-AI prototype for a client (Sep 2026).</p></div>
+        </li>
+        <li class="reveal" data-evidence="E-009 E-048 E-022">
+          <span class="when">Aug 2025 – May 2026</span>
+          <div><h3>Business Consultant <span class="org">· Varicent</span></h3><p>Requirements, configuration in Varicent Designer, SQL investigation and QA/UAT inside client implementation projects.</p></div>
+        </li>
+        <li class="reveal" data-evidence="E-010 E-011 E-012 E-016 E-018">
+          <span class="when">Jan 2024 – May 2025</span>
+          <div><h3>Partner Process Specialist <span class="org">· Snowflake</span></h3><p>Owned the monthly partner cloud-funds process; automated the data matching with Python and Snowflake notebooks.</p></div>
+        </li>
+        <li class="reveal" data-evidence="E-049 E-043">
+          <span class="when">Aug 2023 – Jan 2024</span>
+          <div><h3>Business Analyst (contract) <span class="org">· VMware</span></h3><p>Coordinated Data, BI and Analytics workstreams; cleansed data in Excel for mass Salesforce imports.</p></div>
+        </li>
+        <li class="reveal" data-evidence="E-050 E-052 E-015">
+          <span class="when">Jun 2021 – Jun 2023</span>
+          <div><h3>Technical Support Analyst, then Data Analyst <span class="org">· Amadeus</span></h3><p>Supported a Salesforce-based product, built the team knowledge base, then analysed case data as a Data Analyst.</p></div>
+        </li>
+        <li class="reveal" data-evidence="E-052 E-040">
+          <span class="when">Jan 2020 – Apr 2021</span>
+          <div><h3>Customer support, then subject-matter expert <span class="org">· Sykes</span></h3><p>Supported US customers in English, then moved into a subject-matter expert role on the floor.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 04 SKILLS -->
+  <section class="block" id="skills" aria-labelledby="skills-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="num">05 / Skills</span>
+        <h2 id="skills-title">What I use, and where I used it.</h2>
+        <p>Levels appear only where I can state them honestly.</p>
+      </div>
+      <div class="skills">
+        <div class="card reveal">
+          <h3>AI agent direction</h3>
+          <ul>
+            <li data-evidence="E-028"><span>Directing Claude and Codex agents</span><small>Program Owner</small></li>
+            <li data-evidence="E-029"><span>Merge gates and tiered approvals</span><small>Framework</small></li>
+            <li data-evidence="E-031"><span>Cross-vendor AI review</span><small>Framework</small></li>
+            <li data-evidence="E-004"><span>Prompt-quality checklists</span><small>Agent tasks</small></li>
+            <li data-evidence="E-034"><span>Rules registers and failure logs</span><small>Framework</small></li>
+            <li data-evidence="E-005"><span>Review-gated document AI design</span><small>Project</small></li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <h3>Data and analysis</h3>
+          <ul>
+            <li data-evidence="E-011 E-044"><span>SQL, SQL Server</span><small>Snowflake, Varicent</small></li>
+            <li data-evidence="E-012"><span>Python for data work</span><small>Snowflake, Amadeus</small></li>
+            <li data-evidence="E-017"><span>Excel</span><small>Snowflake, VMware, Varicent</small></li>
+            <li data-evidence="E-018"><span>Snowflake notebooks</span><small>Snowflake</small></li>
+            <li data-evidence="E-042"><span>Tableau</span><small>Amadeus, Snowflake</small></li>
+            <li data-evidence="E-014"><span>Power BI</span><small>Basic</small></li>
+            <li data-evidence="E-048"><span>Reconciliation, root-cause analysis</span><small>Varicent</small></li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <h3>Business systems and consulting</h3>
+          <ul>
+            <li data-evidence="E-015 E-043"><span>Salesforce</span><small>Amadeus, VMware, Snowflake</small></li>
+            <li data-evidence="E-043"><span>Salesforce Data Loader</span><small>VMware, Amadeus</small></li>
+            <li data-evidence="E-022"><span>Varicent Designer</span><small>Varicent</small></li>
+            <li data-evidence="E-016"><span>Workday</span><small>Business user</small></li>
+            <li data-evidence="E-048 E-024"><span>Requirements, QA/UAT</span><small>Varicent, VMware</small></li>
+            <li data-evidence="E-050"><span>Documentation and training</span><small>Amadeus</small></li>
+            <li data-evidence="E-047"><span>AWS</span><small>Basic exposure</small></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 HOW I WORK -->
+  <section class="block" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="num">06 / How I work</span>
+        <h2 id="how-title">Rules I hold the agents to, and myself.</h2>
+      </div>
+      <div class="principles">
+        <div class="principle reveal" data-evidence="E-027 E-034">
+          <h3>Evidence first</h3>
+          <p>A claim needs a source. This site follows the same rule: every line traces to a written record, and the parts you can check yourself are marked.</p>
+        </div>
+        <div class="principle reveal" data-evidence="E-036">
+          <h3>Re-test what's written down</h3>
+          <p>A tool failure was documented as permanent. It was re-tested, no longer happened, and the record was corrected with the cause logged.</p>
+        </div>
+        <div class="principle reveal" data-evidence="E-031 E-029">
+          <h3>The author never reviews their own work</h3>
+          <p>One AI vendor writes, the other reviews, and nothing merges without that review at the exact commit.</p>
+        </div>
+        <div class="principle reveal" data-evidence="E-028 E-034">
+          <h3>Decisions in writing</h3>
+          <p>Decisions are dated and recorded; failures go in a log with root cause and fix. A decision that isn't written down doesn't exist.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 NOTES (placeholder: no posts exist yet) -->
+  <section class="block" id="notes" aria-labelledby="notes-title" data-placeholder="notes">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="num">07 / Notes</span>
+        <h2 id="notes-title">Things I'm writing up.</h2>
+        <p>Short notes from running AI agents under rules. None are published yet.</p>
+      </div>
+      <div class="notes">
+        <article class="note reveal" data-evidence="E-031 E-029"><span class="soon">Coming soon</span><h3>Why the author never reviews its own work</h3><p>What cross-vendor review caught that the author's own tests missed.</p></article>
+        <article class="note reveal" data-evidence="E-027 E-034"><span class="soon">Coming soon</span><h3>An evidence-first CV</h3><p>No source, no claim: writing a CV the way you'd run a merge gate.</p></article>
+        <article class="note reveal" data-evidence="E-036"><span class="soon">Coming soon</span><h3>When a "permanent" failure wasn't</h3><p>Re-testing a documented tool failure, and why stale facts are a bug.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 EDUCATION AND LANGUAGES -->
+  <section class="block" id="education" aria-labelledby="edu-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="num">08 / Education and languages</span>
+        <h2 id="edu-title">Still learning, on purpose.</h2>
+      </div>
+      <div class="two">
+        <div class="card reveal">
+          <h3>Education</h3>
+          <ul class="kv">
+            <li data-evidence="E-045"><b>Data Science Engineering, LEAD University</b><span>In progress, more than 50% completed</span></li>
+            <li data-evidence="E-046"><b>IT Essentials, Cisco Networking Academy</b><span>Certificate</span></li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <h3>Languages</h3>
+          <ul class="kv">
+            <li data-evidence="E-041"><b>Spanish</b><span>Native</span></li>
+            <li data-evidence="E-040"><b>English</b><span>Professional working (B2)</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 CONTACT -->
+  <section class="block" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact reveal">
+        <span class="num">09 / Contact</span>
+        <h2 id="contact-title">Hiring for AI operations, agent workflows or analysis?</h2>
+        <p>Based in Costa Rica and open to remote roles. The fastest way to reach me is below.</p>
+        <!-- CARLOS: fill these two links yourself, then delete the placeholder note. No phone or email on purpose. -->
+        <div class="links">
+          <a class="btn primary" href="https://www.linkedin.com/in/carlos-redondo-alvarado-1185251a4/" rel="me noopener">LinkedIn</a>
+          <a class="btn ghost" href="https://github.com/CarlitosRed" rel="me noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span>© 2026 Carlos Redondo · Costa Rica</span>
+    <span>Built with AI assistance and reviewed by a human.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.body.classList.remove('no-js');
+  var els=document.querySelectorAll('.reveal');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+  document.querySelectorAll('[data-placeholder]').forEach(function(a){
+    a.addEventListener('click',function(ev){if(a.getAttribute('href')==='#'){ev.preventDefault();}});
+  });
+})();
+</script>
+</body>
+</html>
