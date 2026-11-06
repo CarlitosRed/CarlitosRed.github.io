@@ -147,3 +147,13 @@ article.story li{margin:6px 0}
 @media (max-width:420px){body{font-size:17px}.wrap,.narrow{padding:0 16px}.intro{padding:56px 0 56px}section.block{padding:60px 0}.chapter{padding-left:40px}.chapter a.card{padding:20px}.chapters::before{left:7px}.chapter::before{left:0}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.chapter a.card{transition:none}}
 @media print{header.top{display:none}}
+
+/* Portfolio addition signed: Codex · Backblaze Portfolio, 2026-11-05. */
+section[id], article[id]{scroll-margin-top:88px}
+.work article.feature{display:grid;grid-template-columns:1fr 1.1fr;gap:30px;align-items:center}
+.project-copy{display:flex;flex-direction:column;gap:0}
+.work .project-limit{font-size:15px;color:var(--ink-3)}
+.project-screen{margin:0;min-width:0}
+.project-screen img{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.project-screen figcaption{font-size:12px;color:var(--ink-3);margin-top:10px}
+@media(max-width:760px){.work article.feature{grid-template-columns:1fr;gap:22px}}
